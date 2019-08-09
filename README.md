@@ -1,8 +1,11 @@
-# crm
+# Qutrunk - web GUI
+This is a web GUI component of project Qutrunk [(Github)](https://github.com/spinache/qutrunk-api).
 
-> A Vue.js project
+# What is Qutrunk?
+Simple REST API/gRPC for using queues, management for queues, access tokens, track usage of your queues. Multiple backends supported. https://qutrunk.com
 
 ## Build Setup
+This is a standard Vue.js project. After building, just deploy the files behind a web server (e.g. nginx) an serve build files statically. You can find more information and examples in [Qutrunk Wiki](https://github.com/spinache/qutrunk-api/wiki)
 
 ``` bash
 # install dependencies
@@ -17,5 +20,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
