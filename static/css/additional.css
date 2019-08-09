@@ -1,0 +1,97 @@
+.spinner {
+    display: inline-block;
+    -webkit-animation: rotation 1s linear infinite;
+    -o-animation: rotation 1s linear infinite;
+    animation: rotation 1s linear infinite;
+}
+
+.alert a {
+  text-decoration: underline;
+  font-weight: 800;
+  color: white !important;
+}
+
+.table-loader{
+	text-align: center; 
+	padding: 50px;
+}
+
+.badge {
+	text-transform: uppercase;
+}
+
+/*
+We set the element we are applying our loading mask to relative  
+*/
+.loading-mask {
+  position: relative;
+}
+
+/*
+Because we set .loading-mask relative, we can span our ::before  
+element over the whole parent element  
+*/
+.loading-mask::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: .1875rem;
+}
+
+/*
+Spin animation for .loading-mask::after  
+*/
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+/*
+The loading throbber is a single spinning element with three  
+visible borders and a border-radius of 50%.  
+Instead of a border we could also use a font-icon or any  
+image using the content attribute.  
+*/
+.loading-mask::after {
+  content: "";
+  position: absolute;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent rgb(0,0,0,.5) rgb(0,0,0,0.5);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  top: calc(50% - 12px);
+  left: calc(50% - 12px);
+  animation: 2s linear 0s normal none infinite running spin;
+  filter: drop-shadow(0 0 2 rgba(0, 0, 0, 0.33));
+}
+
+@media screen and (min-width: 767.98px) {
+  .navbar {
+    display:none;
+  }
+}
+
+
+@media screen and (min-width: 767.98px) {
+  .navbar-top {
+    padding-top: 0;
+  }
+}
+
+.sidebar-content{
+  margin-top: 20px;
+}
+
+.logo-qutrunk{
+  margin-bottom: 10px;
+}

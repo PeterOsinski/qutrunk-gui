@@ -1,0 +1,53 @@
+
+version: 2
+jobs:
+  build_panel:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:9.11
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      # Init submodules
+      - run: git submodule update --init --recursive
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v2-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: npm run build
+      
+      - run: echo 'export ZIP_FILE=$CIRCLE_BRANCH-latest.zip' >> $BASH_ENV
+
+      - run: echo $ZIP_FILE;
+      - run: cd dist && zip -rq /tmp/$ZIP_FILE *
+
+      #circle ci does not yet support variables in store_artifacts
+      - run: mkdir -p workspace
+      - run: cp /tmp/$ZIP_FILE workspace/dist.zip
+      - persist_to_workspace:
+          root: workspace
+          #path must be relative to working dir
+          paths:
+            - dist.zip
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - build_panel:
+          filters:
+            branches:
+              only: master
